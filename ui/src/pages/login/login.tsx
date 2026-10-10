@@ -1,9 +1,8 @@
-import { Divider, Typography } from 'antd';
+import { Typography } from 'antd';
 import { Navigate, generatePath, useSearchParams } from 'react-router-dom';
 
 import { isSafeRedirectPath, redirectToQueryParam } from '@ui/config/auth';
 import { paths } from '@ui/config/paths';
-import { AdminLogin } from '@ui/features/auth/admin-login';
 import { useAuthContext } from '@ui/features/auth/context/use-auth-context';
 import { OIDCLogin } from '@ui/features/auth/oidc-login';
 import { LoadingState } from '@ui/features/common';
@@ -37,15 +36,12 @@ export const Login = () => {
       <KargoLogo />
       <div className={styles.box}>
         {isLoading && <LoadingState />}
-        {data?.adminAccountEnabled && (
-          <>
-            <Typography.Title level={4}>Admin Login</Typography.Title>
-            <AdminLogin />
-          </>
-        )}
-        {data?.oidcConfig && data?.adminAccountEnabled && (
-          <Divider className='!my-6 !text-gray-400 !font-light'>OR</Divider>
-        )}
+        {/*
+          SSO only. The admin account stays ENABLED for CLI/API break-glass,
+          but the password form is deliberately not rendered. To restore it,
+          re-add the AdminLogin block and the "OR" Divider from upstream
+          login.tsx.
+        */}
         {data?.oidcConfig && <OIDCLogin oidcConfig={data.oidcConfig} />}
         {data && !data.oidcConfig && !data.adminAccountEnabled && (
           <Typography.Text>

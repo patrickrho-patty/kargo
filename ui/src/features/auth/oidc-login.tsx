@@ -183,7 +183,7 @@ export const OIDCLogin = ({ oidcConfig }: Props) => {
 
   return (
     <Button onClick={login} block size='large' loading={isFetching} disabled={!issuerUrl}>
-      SSO Login
+      Login with Patty ID
     </Button>
   );
 };
